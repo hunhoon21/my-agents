@@ -27,20 +27,20 @@ class SystemConfig(BaseModel):
     log_file: Optional[str] = None
     database: DatabaseConfig = DatabaseConfig()
     llm: LLMConfig = LLMConfig()
-    
-    
+
+
 def load_config(config_path: Optional[str] = None) -> SystemConfig:
     if config_path is None:
         config_path = os.getenv("CONFIG_PATH", "configs/config.yaml")
-    
+
     config_file = Path(config_path)
-    
+
     if not config_file.exists():
         return SystemConfig()
-    
-    with open(config_file, 'r', encoding='utf-8') as f:
+
+    with open(config_file, "r", encoding="utf-8") as f:
         config_data = yaml.safe_load(f)
-    
+
     return SystemConfig(**config_data)
 
 
@@ -52,15 +52,15 @@ def get_env_config() -> Dict[str, Any]:
             "username": os.getenv("DB_USERNAME", ""),
             "password": os.getenv("DB_PASSWORD", ""),
             "database": os.getenv("DB_NAME", ""),
-            "type": os.getenv("DB_TYPE", "postgresql")
+            "type": os.getenv("DB_TYPE", "postgresql"),
         },
         "llm": {
             "provider": os.getenv("LLM_PROVIDER", "openai"),
             "api_key": os.getenv("OPENAI_API_KEY", ""),
             "model": os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
             "max_tokens": int(os.getenv("LLM_MAX_TOKENS", "1000")),
-            "temperature": float(os.getenv("LLM_TEMPERATURE", "0.7"))
+            "temperature": float(os.getenv("LLM_TEMPERATURE", "0.7")),
         },
         "log_level": os.getenv("LOG_LEVEL", "INFO"),
-        "log_file": os.getenv("LOG_FILE")
+        "log_file": os.getenv("LOG_FILE"),
     }

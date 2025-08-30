@@ -23,14 +23,14 @@ class BaseAgent(ABC):
     def __init__(self, config: AgentConfig):
         self.config = config
         self.name = config.name
-        
+
     @abstractmethod
-    async def execute(self, **kwargs) -> AgentResult:
+    async def execute(self, **kwargs: Any) -> AgentResult:
         pass
-    
+
     @abstractmethod
     def validate_config(self) -> bool:
         pass
-    
+
     def get_description(self) -> str:
         return self.config.description
