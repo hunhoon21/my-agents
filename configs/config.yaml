@@ -1,0 +1,33 @@
+# My Agents 설정 파일
+
+log_level: "INFO"
+log_file: null  # 파일 로깅을 원하면 "logs/agents.log" 등으로 설정
+
+# 데이터베이스 설정
+database:
+  type: "postgresql"  # postgresql, mysql, sqlite
+  host: "localhost"
+  port: 5432
+  username: ""  # 환경변수 DB_USERNAME 또는 여기에 직접 설정
+  password: ""  # 환경변수 DB_PASSWORD 또는 여기에 직접 설정  
+  database: ""  # 환경변수 DB_NAME 또는 여기에 직접 설정
+
+# LLM 설정
+llm:
+  provider: "openai"  # openai, anthropic, local
+  api_key: ""  # 환경변수 OPENAI_API_KEY 권장
+  model: "gpt-3.5-turbo"
+  max_tokens: 1000
+  temperature: 0.7
+
+# 에이전트별 설정들은 여기에 추가
+agents:
+  naver_blog_commenter:
+    enabled: true
+    max_comments_per_run: 5
+    delay_between_comments: 2  # 초
+    
+  sql_agent:
+    enabled: true
+    max_query_time: 30  # 초
+    chart_output_dir: "outputs/charts"
